@@ -1,0 +1,113 @@
+/*CSS*/
+
+*{
+	margin: 0;
+	font-family: Vollkorn;
+}
+
+body header{
+	height: 208px;
+	overflow: auto;
+	background-image: url(bike4.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: top;
+}
+
+.login{
+	background-color: rgb(0,0,0); 
+  	background-color: rgba(0,0,0, 0.4); 
+  	color: white;
+  	border: 3px solid #f1f1f1;
+  	margin-top: 25px;
+  	margin-right: 25px;
+  	float: right;
+  	font-size: 15pt;
+  	margin-bottom: 25px;
+}
+
+.login ul li{
+	padding-top: 25px;
+	padding-right: 15px;
+	float: right;
+	list-style-type: none;
+}
+
+body header h1{
+	float: left;
+	padding-left: 35px;
+	padding-top: 25px;
+	font-size: 50pt;
+}
+
+body header button{
+	float: right;
+	clear: right;
+	margin-right: 15px;
+	margin-top: 12px; 
+	margin-bottom: 15px;
+}
+
+body main{
+	margin: auto;
+	overflow: auto;
+}
+
+
+body footer{
+	height: 150px;
+	margin: auto;
+	overflow: auto;
+	background-image: url(bike4.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: bottom;
+}
+
+body footer p{
+	float: left;
+	padding-left: 25px;	
+}
+
+.content{
+	padding-top: 15px;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.map{
+	padding-left: 35%;
+	padding-top: 60px;
+}
+
+.nav ul{
+	overflow: auto;
+	list-style-type: none;
+	background-color: rgb(89, 89, 89);
+	margin: 0%;
+	padding: 0%;
+	clear: both;
+}
+
+.nav li{
+	float: left;
+}
+
+.nav li a{
+	display: block;
+	color: white;
+	text-align: center;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	padding-left: 116.7px;
+	padding-right: 116.7px;
+	text-decoration: none;
+}
+
+.nav li a:hover{
+	background-color: rgb(20, 20, 20);
+}
+
+.current{
+	background-color: #669999;
+}
