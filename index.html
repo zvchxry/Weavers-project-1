@@ -1,0 +1,249 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
+      <script type="text/javascript">
+          //HERE'S AN EXAMPLE OF AN AJAX CALL WITH JQUERY!
+          function LogOn(userId, pass) {
+              //the url of the webservice we will be talking to
+              var webMethod = "ProjectServices.asmx/LogOn";
+              userId = document.getElementById('uid').value;
+              pass = document.getElementById('pass').value;
+              //the parameters we will pass the service (in json format because curly braces)
+              //note we encode the values for transmission over the web.  All the \'s are just
+              //because we want to wrap our keynames and values in double quotes so we have to
+              //escape the double quotes (because the overall string we're creating is in double quotes!)
+              var parameters = "{\"uid\":\"" + encodeURI(userId) + "\",\"pass\":\"" + encodeURI(pass) + "\"}";
+
+              //jQuery ajax method
+              $.ajax({
+                  //post is more secure than get, and allows
+                  //us to send big data if we want.  really just
+                  //depends on the way the service you're talking to is set up, though
+                  type: "POST",
+                  //the url is set to the string we created above
+                  url: webMethod,
+                  //same with the data
+                  data: parameters,
+                  //these next two key/value pairs say we intend to talk in JSON format
+                  contentType: "application/json; charset=utf-8",
+                  dataType: "json",
+                  //jQuery sends the data and asynchronously waits for a response.  when it
+                  //gets a response, it calls the function mapped to the success key here
+                  success: function (msg) {
+                      //the server response is in the msg object passed in to the function here
+                      //since our logon web method simply returns a true/false, that value is mapped
+                      //to a generic property of the server response called d (I assume short for data
+                      //but honestly I don't know...)
+                      if (msg.d) {
+                          alert("you have been logged on")
+
+                      }
+                      else {
+                          //server replied false, so let the user know
+                          //the logon failed
+                          alert("logon failed! Please check your credentials and try again.");
+                      }
+                  },
+                  error: function (e) {
+                      //if something goes wrong in the mechanics of delivering the
+                      //message to the server or the server processing that message,
+                      //then this function mapped to the error key is executed rather
+                      //than the one mapped to the success key.  This is just a garbage
+                      //alert becaue I'm lazy
+                      alert("Your message has not gone through please try again.");
+                  }
+              });
+          }
+
+    </script>
+    <!--END OF YOUR OWN JAVASCRIPT-->
+    <!--AND YOUR OWN CSS CAN GO HERE AS WELL-->
+    <style>
+        * {
+            margin: 0;
+            font-family: Vollkorn;
+        }
+
+        body header {
+            height: 208px;
+            overflow: auto;
+            background-image: url(bike4.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: top;
+        }
+
+        .login {
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0, 0.4);
+            color: white;
+            border: 3px solid #f1f1f1;
+            margin-top: 25px;
+            margin-right: 25px;
+            float: right;
+            font-size: 15pt;
+            margin-bottom: 25px;
+        }
+
+            .login ul li {
+                padding-top: 25px;
+                padding-right: 15px;
+                float: right;
+                list-style-type: none;
+            }
+
+        body header h1 {
+            float: left;
+            padding-left: 35px;
+            padding-top: 25px;
+            font-size: 50pt;
+        }
+
+        body header button {
+            float: right;
+            clear: right;
+            margin-right: 15px;
+            margin-top: 12px;
+            margin-bottom: 15px;
+        }
+
+        body main {
+            margin: auto;
+            overflow: auto;
+        }
+
+
+        body footer {
+            height: 150px;
+            margin: auto;
+            overflow: auto;
+            background-image: url(bike4.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: bottom;
+        }
+
+            body footer p {
+                float: left;
+                padding-left: 25px;
+            }
+
+        .content {
+            padding-top: 15px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .map {
+            padding-left: 35%;
+            padding-top: 60px;
+        }
+
+        .nav ul {
+            overflow: auto;
+            list-style-type: none;
+            background-color: rgb(89, 89, 89);
+            margin: 0%;
+            padding: 0%;
+            clear: both;
+        }
+
+        .nav li {
+            float: left;
+        }
+
+            .nav li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                padding-left: 116.7px;
+                padding-right: 116.7px;
+                text-decoration: none;
+            }
+
+                .nav li a:hover {
+                    background-color: rgb(20, 20, 20);
+                }
+
+        .current {
+            background-color: #669999;
+        }
+    </style>
+    <!--END OF YOUR OWN CSS-->
+</head>
+<body>
+    
+    <!--Home HTML-->
+    <!DOCTYPE html>
+
+    <html>
+
+    <head>
+
+        <title>Weaver's Bike Trails</title>
+        <link rel="stylesheet" type="text/css" href="weaver.css">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Vollkorn">
+
+    </head>
+
+    <body>
+
+        <header>
+
+            <div class="login">
+
+                <ul>
+                    <li>Password: <input type="password" name="pass" id="pass"></li>
+                    <li>Username: <input type="text" name="user" id="uid"></li>
+                </ul>
+
+                <button id="submit" onclick="LogOn()">Login</button>
+
+            </div>
+
+            <h1>Weaver's Bike Trails</h1>
+
+            <div class="nav">
+                <ul>
+                    <li><a class="current" href="weaver_home.html">Home</a></li>
+                    <li><a href="weaver_trails.html">Trails</a></li>
+                    <li><a href="">Account</a></li>
+                    <li><a href="">FAQ</a></li>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="">About Us</a></li>
+                </ul>
+            </div>
+
+        </header>
+
+        <main>
+
+            <div class="content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut ligula eget nulla molestie dapibus. Mauris id auctor velit, quis euismod sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus semper magna vitae aliquam gravida. Suspendisse in mauris vitae turpis iaculis tincidunt sed vitae nibh. Cras sit amet turpis enim. Curabitur lacus turpis, elementum sit amet est sit amet, placerat luctus ipsum. Praesent eu hendrerit magna. Nulla nisl nibh, gravida a metus vitae, euismod pharetra sem. Phasellus vel maximus dolor. Donec eget nulla ante. Nullam lobortis euismod tellus ut molestie. Etiam non sodales lacus. Ut ac semper metus, ac convallis lacus. Maecenas eu odio ac ante vulputate porttitor eget at est. Donec at dui nec lacus condimentum malesuada sed id ante.
+                <br>
+                <br>
+                Pellentesque et tellus urna. Mauris mollis, nunc in tincidunt tempor, magna lorem ullamcorper tellus, vel aliquam eros lorem vel nisl. Nam dui felis, ullamcorper quis commodo in, iaculis non lorem. Maecenas non mauris sit amet turpis feugiat pellentesque. Aliquam quis aliquet nulla. Vestibulum felis urna, fringilla id semper nec, maximus vel enim. Cras tristique tempus nisl. Duis lobortis, risus quis ultrices congue, massa ipsum ultricies leo, non euismod enim risus sed urna. Aenean sit amet elementum velit. Sed auctor, velit tempor euismod aliquet, libero lorem gravida sapien, ut finibus neque felis sed mauris. In ac tortor justo. Fusce porttitor blandit lectus in commodo.
+            </div>
+
+            <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13321.214265514376!2d-111.94032539999999!3d33.4153292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1581966802741!5m2!1sen!2sus" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+            </div>
+
+        </main>
+
+        <footer></footer>
+
+    </body>
+
+</html>
+</body>
+</html >
